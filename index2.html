@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine JS</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+    <!-- x-data -->
+    <div x-data="{ open: false }">
+        <button @click="open = !open">Toggle</button>
+        <div x-show="open">Show content</div>
+    </div>
+
+    <br>
+
+    <!-- data binding -->
+    <form x-data="{ name: '' }" @submit.prevent="console.log(name)">
+        <input type="text" x-model="name">
+        <!-- <span x-text="name"></span> -->
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+
+    <div x-data="{ 
+        name: '',
+        
+        toUpperCaseText () {
+            this.name = this.name.toUpperCase();
+        }
+    }">
+        <input type="text" x-model="name">
+        <span x-text="name"></span>
+        <button @click="toUpperCaseText">Submit</button>
+    </div>
+
+    <br>
+
+    <!-- Image finder -->
+    <div 
+        x-data="{ 
+            query: '',
+            img: '',
+            getImage() {
+                this.img = `https://source.unsplash.com/1600x900/?${this.query}`
+            }
+        }">
+
+        <form x-on:submit.prevent="getImage">
+            <input type="text" x-model="query">
+            <button type="submit">Search</button>
+        </form>
+
+        <div style="margin-top: 5px;">
+            <img x-bind:src="img" style="width: 300px;">
+        </div>
+
+    </div>
+</body>
+</html>

@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alpine JS 2</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
+    <!-- More Inputs -->
+    <div 
+        x-data="{
+            agreed: false,
+        }">
+        <input type="checkbox" x-model="agreed">
+        <span x-show="agreed">Checked</span>
+    </div>
+
+    <br>
     
+    <form 
+        x-on:submit.prevent="deleteUser"
+        x-data="{ 
+            users: [],
+            deleteUser () {
+                console.log(this.users)
+            }
+        }">
+        <input type="checkbox" x-model="users" value="1">Alex
+        <input type="checkbox" x-model="users" value="2">John
+        <input type="checkbox" x-model="users" value="3">Jane
+
+        <div>
+            <span x-text="users"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
